@@ -38,12 +38,16 @@ class Known(object):
                 if 'Gecko' in line and '[' in line:
                     excludeLeftPart = line.split('[')[1]
                     errorMsg = excludeLeftPart.split(' line: ')[0]
-                    if 'backgroud' in line:
-                        import pdb; pdb.set_trace()
                     if 'JavaScript error'.lower() in line.lower() and errorMsg not in str(self.read_known_file()) and line.rstrip() not in self.interestingJsErrors:
                         self.interestingJsErrors.append(line.rstrip())
                     elif 'JavaScript warning'.lower() in line.lower() and errorMsg not in str(self.read_known_file()) and line.rstrip() not in self.interestingJsWarnings:
                         self.interestingJsWarnings.append(line.rstrip())
+
+                    for knownError in self.read_known_file():
+                        if 'JavaScript error'.lower() in line.lower() and knownError in errorMsg and line.rstrip() in self.interestingJsErrors:
+                            self.interestingJsErrors.remove(line.rstrip())
+                        if 'JavaScript warning'.lower() in line.lower() and knownError in errorMsg and line.rstrip() in self.interestingJsWarnings:
+                            self.interestingJsWarnings.remove(line.rstrip())
 
 
 def main():
