@@ -22,9 +22,9 @@ class Known(object):
             contentsF = f.readlines()
             for line in contentsF:
                 if not line.startswith('#'):
-                    knownErrors.append(line)
+                    knownErrors.append(line.rstrip())
 
-        return knownErrors
+        return [x for x in knownErrors if x]
 
     def analyse_log_file(self):
         '''
