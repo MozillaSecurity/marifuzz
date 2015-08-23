@@ -17,12 +17,13 @@ class Known(object):
         Returns a list of known errors excluding comments.
         '''
         knownErrors = []
-        with open(os.path.expanduser(os.path.join(os.pardir, os.pardir, 'known',
-                                                     'mozilla-central', 'jserrors.txt')), 'rb') as f:
-            contentsF = f.readlines()
-            for line in contentsF:
-                if not line.startswith('#'):
-                    knownErrors.append(line.rstrip())
+        knownErrorsFile = os.path.expanduser(os.path.join('knownB2GErrors.txt'))
+        if os.path.isfile(knownErrorsFile):
+            with open(knownErrorsFile, 'rb') as f:
+                contentsF = f.readlines()
+                for line in contentsF:
+                    if not line.startswith('#'):
+                        knownErrors.append(line.rstrip())
 
         return [x for x in knownErrors if x]
 
