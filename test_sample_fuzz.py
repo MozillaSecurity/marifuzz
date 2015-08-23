@@ -54,11 +54,15 @@ def demo_shuffling_opening_non_opened_apps(apps, installed_apps, running_apps):
 
 def demo_non_stop_launching_apps(apps, installed_apps):
     count = 1
+    selected_app = ''
     while True:
         app_name = random.choice(installed_apps)
-        if app_name not in IGNORE_APPS_NAMES:
+        # Make sure we are not launching something that was just previously launched
+        if app_name not in IGNORE_APPS_NAMES and selected_app != app_name:
+            selected_app = app_name
             count += 1
             print str(count) + ' Opening: ' + app_name
+
             print_frc_lines('apps.launch("' + app_name + '")')
             apps.launch(app_name)
             time.sleep(APP_LAUNCH_TIMEOUT)
