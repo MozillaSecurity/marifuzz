@@ -16,7 +16,15 @@ Assumptions:
 7. Install gaiatest-v2.0 from pip using `~/trees/gaiatest20/pip install gaiatest-v2.0`.
 8. Run `adb forward tcp:2828 tcp:2828`.
 9. Change into marifuzz directory using `cd ~/trees/marifuzz`.
-10. Run `~/trees/gaiatest20/bin/gaiatest --address=localhost:2828 --testvars=testVars.json --restart test_sample_fuzz.py`.
+10. Have a testvars file, e.g. ~/trees/marifuzz/testVars.json
+```
+{
+    "acknowledged_risks": true,
+    "skip_warning": true
+}
+```
+11. Allow python-2.7 to accept incoming network connections.
+12. Run `~/trees/gaiatest20/bin/gaiatest --address=localhost:2828 --testvars=testVars.json --restart test_sample_fuzz.py`.
 
 If using gaiatest from pip:
 ===========================
