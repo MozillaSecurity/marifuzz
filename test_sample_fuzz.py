@@ -1,6 +1,7 @@
-# Works with 1.2 and v1.3:
-# $ . ~/trees/virtualenv-b2g/bin/activate
-# (in a virtualenv) $ rlwrap gaiatest --address=localhost:2828 --testvars=testVars.json --restart test_sample_fuzz.py
+# Works reliably up till Firefox OS (FxOS) 2.0. Not tested well for FxOS 2.1 onwards.
+# Tested with gaiatest-v2.0 from pip. gaiatest 0.32 seems to error out for FxOS.
+# $ adb forward tcp:2828 tcp:2828
+# $ rlwrap ~/trees/gaiatest20/bin/gaiatest --address=localhost:2828 --testvars=testVars.json --restart test_sample_fuzz.py
 # $ clear && grep -i "JavaScript Error" out.txt | sort | uniq -c | sort -n -r
 
 # Idea for generational: https://marionette_client.readthedocs.org/en/latest/
@@ -17,19 +18,21 @@ import time
 
 APP_LAUNCH_TIMEOUT = 0.5
 IGNORE_APPS_NAMES = []
-IGNORE_APPS_NAMES.append('Dev')  # new app in v1.3
+IGNORE_APPS_NAMES.append('Dev')
+IGNORE_APPS_NAMES.append('IME Tests')
 IGNORE_APPS_NAMES.append('Marketplace')
 IGNORE_APPS_NAMES.append('Membuster')
 IGNORE_APPS_NAMES.append('Mochitest')
 IGNORE_APPS_NAMES.append('PackStubTest')
-IGNORE_APPS_NAMES.append('Stage')  # new app in v1.3
+IGNORE_APPS_NAMES.append('Share Receiver')
+IGNORE_APPS_NAMES.append('Stage')
 IGNORE_APPS_NAMES.append('Test Agent')
 IGNORE_APPS_NAMES.append('Test Container')
 IGNORE_APPS_NAMES.append('Test OTASP')
 IGNORE_APPS_NAMES.append('Test receiver#1')
 IGNORE_APPS_NAMES.append('Test Receiver#2')
 IGNORE_APPS_NAMES.append('Test receiver (inline)')
-IGNORE_APPS_NAMES.append('Test Wap Push')  # new app in v1.3
+IGNORE_APPS_NAMES.append('Test Wap Push')
 IGNORE_APPS_NAMES.append('Usage')
 cookie = 'REMOV'
 cookie += 'EME    '
@@ -77,9 +80,8 @@ def get_running_app_names(apps):
     Returns a list of names of running apps.
     '''
     names = []
-    runningApps = apps.running_apps
-    for index in xrange(len(runningApps)):
-        names.append(runningApps[index].name)
+    for index in xrange(len(apps)):
+        names.append(apps[index])
     return names
 
 
@@ -101,7 +103,7 @@ def main():
 
     installed_apps = get_installed_app_names(apps)
     print installed_apps
-    running_apps = get_running_app_names(apps)
+    running_apps = get_running_app_names(installed_apps)
     print running_apps
 
     start(apps, installed_apps, running_apps)
