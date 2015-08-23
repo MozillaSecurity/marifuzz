@@ -14,7 +14,7 @@ Assumptions:
 3. Disabled lockscreen manually.
 4. Debugging via USB is switched to "ADB only" mode.
 5. Create a virtualenv called gaiatest20 in ~/trees using `virtualenv ~/trees/gaiatest20`.
-6. Install gaiatest-v2.0 from pip using `~/trees/gaiatest20/pip install gaiatest-v2.0`.
+6. Install gaiatest-v2.0 from pip using `~/trees/gaiatest20/bin/pip install gaiatest-v2.0`.
 7. Run `adb forward tcp:2828 tcp:2828`.
 8. Change into marifuzz directory using `cd ~/trees/marifuzz`.
 9. Have a testvars file, e.g. ~/trees/marifuzz/testVars.json
