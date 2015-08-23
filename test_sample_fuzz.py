@@ -40,7 +40,6 @@ def demo_shuffling_opening_non_opened_apps(apps, installed_apps, running_apps):
     random.shuffle(installed_apps)
     print installed_apps
     for app_name in installed_apps:
-        #import pdb; pdb.set_trace()
         if app_name not in IGNORE_APPS_NAMES and app_name not in running_apps and count <= 3:  # launch 3 apps at a time
             print str(count) + ': ' + app_name
             apps.launch(app_name)
