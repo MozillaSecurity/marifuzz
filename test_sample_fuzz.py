@@ -33,6 +33,7 @@ IGNORE_APPS_NAMES.append('Test receiver#1')
 IGNORE_APPS_NAMES.append('Test Receiver#2')
 IGNORE_APPS_NAMES.append('Test receiver (inline)')
 IGNORE_APPS_NAMES.append('Test Wap Push')
+IGNORE_APPS_NAMES.append('UI tests')
 IGNORE_APPS_NAMES.append('Usage')
 cookie = 'REMOV'
 cookie += 'EME    '
